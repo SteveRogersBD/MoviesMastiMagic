@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <!-- Set the light gray background color -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#101323"/>
+        </shape>
+    </item>
+
+
+</selector>
