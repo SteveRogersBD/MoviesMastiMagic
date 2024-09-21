@@ -31,11 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        retrofit = new Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/movie/")
-                .addConverterFactory(GsonConverterFactory.create()).build();
-
-        nowPlayingApi = retrofit.create(NowPlayingApi.class);
+        nowPlayingApi = RetrofitInstance.retrofit.create(NowPlayingApi.class);
         nowPlayingApi.getNowPlayingMovies("en-US",1)
                 .enqueue(new Callback<NowPlayingResponse>() {
                     @Override

@@ -5,4 +5,5 @@
     <color name="txtColor">#6A6262</color>
     <color name="orange">#FF5722</color>
     <color name="dark_blue">#111423</color>
+    <color name="text_bg">#23273E</color>
 </resources>
