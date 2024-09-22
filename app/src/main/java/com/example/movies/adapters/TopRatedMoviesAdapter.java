@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.movies.MovieDetailsActivity;
 import com.example.movies.R;
 import com.example.movies.response.NowPlayingResponse;
 import com.example.movies.response.TopRatedMoviesResponse;
@@ -42,6 +44,15 @@ public class TopRatedMoviesAdapter extends RecyclerView.Adapter<TopRatedMoviesAd
         String baseUrl = "https://image.tmdb.org/t/p/w500"; // Example base URL for TMDb
         String imageUrl = baseUrl + movie.poster_path;
         Picasso.get().load(imageUrl).into(holder.posterMovie);
+        holder.posterMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MovieDetailsActivity.class);
+                intent.putExtra("movieId",movie.id);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -51,9 +62,11 @@ public class TopRatedMoviesAdapter extends RecyclerView.Adapter<TopRatedMoviesAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView posterMovie;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             posterMovie = itemView.findViewById(R.id.poster_pager);
+
         }
     }
 }
