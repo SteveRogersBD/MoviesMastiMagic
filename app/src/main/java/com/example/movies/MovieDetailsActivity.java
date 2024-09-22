@@ -9,13 +9,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.movies.adapters.GenreAdapter;
-import com.example.movies.apiInterfaces.NowPlayingApi;
+import com.example.movies.apiInterfaces.MovieApi;
 import com.example.movies.databinding.ActivityMovieDetailsBinding;
 import com.example.movies.response.MovieByIDResponse;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +23,7 @@ import retrofit2.Response;
 public class MovieDetailsActivity extends AppCompatActivity {
 
     ActivityMovieDetailsBinding binding;
-    NowPlayingApi api;
+    MovieApi api;
     GenreAdapter genreAdapter;
     ArrayList<MovieByIDResponse.Genre>genreList;
     @Override
@@ -39,7 +38,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     private void callApi(int id) {
-        api = RetrofitInstance.retrofit.create(NowPlayingApi.class);
+        api = RetrofitInstance.retrofit.create(MovieApi.class);
         api.getMovieById(id,"en-US").enqueue(new Callback<MovieByIDResponse>() {
             @Override
             public void onResponse(Call<MovieByIDResponse> call, Response<MovieByIDResponse> response) {

@@ -6,29 +6,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movies.MainActivity;
 import com.example.movies.MovieDetailsActivity;
 import com.example.movies.R;
-import com.example.movies.response.NowPlayingResponse;
 import com.example.movies.response.TopRatedMoviesResponse;
 import com.example.movies.response.TopRatedSeriesResponse;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class TopRatedMoviesAdapter extends RecyclerView.Adapter<TopRatedMoviesAdapter.ViewHolder>{
+public class TopRatedSeriesAdapter extends RecyclerView.Adapter<TopRatedSeriesAdapter.ViewHolder>{
 
     Context context;
-    ArrayList<TopRatedMoviesResponse.Result> movies;
+    ArrayList<TopRatedSeriesResponse.Result> movies;
 
-    public TopRatedMoviesAdapter(Context context, ArrayList<TopRatedMoviesResponse.Result> movies) {
+    public TopRatedSeriesAdapter(Context context, ArrayList<TopRatedSeriesResponse.Result> movies) {
         this.context = context;
         this.movies = movies;
     }
@@ -42,7 +37,7 @@ public class TopRatedMoviesAdapter extends RecyclerView.Adapter<TopRatedMoviesAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TopRatedMoviesResponse.Result movie = movies.get(position);
+        TopRatedSeriesResponse.Result movie = movies.get(position);
         String baseUrl = "https://image.tmdb.org/t/p/w500"; // Example base URL for TMDb
         String imageUrl = baseUrl + movie.poster_path;
         Picasso.get().load(imageUrl).into(holder.posterMovie);
