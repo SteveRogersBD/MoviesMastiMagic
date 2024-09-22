@@ -1,0 +1,10 @@
+<!-- res/layout/spinner_item.xml -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:textColor="@color/white"
+    android:text="Nothing"
+    android:background="#FF5722"
+    android:textStyle="bold"
+    android:textSize="18sp" />
