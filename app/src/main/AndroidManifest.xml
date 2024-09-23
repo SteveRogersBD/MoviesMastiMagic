@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".SeriesDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MovieDetailsActivity"
             android:exported="false" />
         <activity

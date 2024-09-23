@@ -5,36 +5,41 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-public class TopRatedSeriesResponse implements Parcelable {
+public class PopularSeriesResponse implements Parcelable {
     public int page;
     public ArrayList<Result> results;
     public int total_pages;
     public int total_results;
 
-    protected TopRatedSeriesResponse(Parcel in) {
+    protected PopularSeriesResponse(Parcel in) {
         page = in.readInt();
-        results = in.createTypedArrayList(Result.CREATOR);
         total_pages = in.readInt();
         total_results = in.readInt();
+        results = in.createTypedArrayList(Result.CREATOR);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(page);
-        dest.writeTypedList(results);
         dest.writeInt(total_pages);
         dest.writeInt(total_results);
+        dest.writeTypedList(results);
     }
 
-    public static final Creator<TopRatedSeriesResponse> CREATOR = new Creator<TopRatedSeriesResponse>() {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<PopularSeriesResponse> CREATOR = new Creator<PopularSeriesResponse>() {
         @Override
-        public TopRatedSeriesResponse createFromParcel(Parcel in) {
-            return new TopRatedSeriesResponse(in);
+        public PopularSeriesResponse createFromParcel(Parcel in) {
+            return new PopularSeriesResponse(in);
         }
 
         @Override
-        public TopRatedSeriesResponse[] newArray(int size) {
-            return new TopRatedSeriesResponse[size];
+        public PopularSeriesResponse[] newArray(int size) {
+            return new PopularSeriesResponse[size];
         }
     };
 
@@ -57,14 +62,8 @@ public class TopRatedSeriesResponse implements Parcelable {
         protected Result(Parcel in) {
             adult = in.readByte() != 0;
             backdrop_path = in.readString();
-
-            // Read the genre_ids list manually
-            int size = in.readInt();
-            genre_ids = new ArrayList<>(size);
-            for (int i = 0; i < size; i++) {
-                genre_ids.add(in.readInt());
-            }
-
+            genre_ids = new ArrayList<>();
+            in.readList(genre_ids, Integer.class.getClassLoader());
             id = in.readInt();
             origin_country = in.createStringArrayList();
             original_language = in.readString();
@@ -79,21 +78,10 @@ public class TopRatedSeriesResponse implements Parcelable {
         }
 
         @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeByte((byte) (adult ? 1 : 0));
             dest.writeString(backdrop_path);
-
-            // Write the genre_ids list manually
-            dest.writeInt(genre_ids.size());
-            for (Integer genreId : genre_ids) {
-                dest.writeInt(genreId);
-            }
-
+            dest.writeList(genre_ids);
             dest.writeInt(id);
             dest.writeStringList(origin_country);
             dest.writeString(original_language);
@@ -105,6 +93,11 @@ public class TopRatedSeriesResponse implements Parcelable {
             dest.writeString(name);
             dest.writeDouble(vote_average);
             dest.writeInt(vote_count);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
         }
 
         public static final Creator<Result> CREATOR = new Creator<Result>() {
@@ -119,9 +112,5 @@ public class TopRatedSeriesResponse implements Parcelable {
             }
         };
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 }
+

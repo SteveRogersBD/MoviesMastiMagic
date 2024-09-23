@@ -2,6 +2,8 @@ package com.example.movies.apiInterfaces;
 
 import com.example.movies.response.MovieByIDResponse;
 import com.example.movies.response.NowPlayingResponse;
+import com.example.movies.response.PopularMoviesResponse;
+import com.example.movies.response.SearchMoviesResponse;
 import com.example.movies.response.TopRatedMoviesResponse;
 import com.example.movies.response.TopRatedSeriesResponse;
 
@@ -43,6 +45,27 @@ public interface MovieApi {
             @Query("page") int page
     );
 
+    @GET("movie/popular")
+    @Headers({
+            "accept: application/json",
+            "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzgwMDEwNDEyNjk0MDc2YjUwZDIzNzJkNGIzMWI0NSIsIm5iZiI6MTcyNjczMDMyNS4xNzI5NzEsInN1YiI6IjY2ZDhlZjcwZTg0NDVhYTljYTAxNzk2MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kSway11ZrYwKrH7Qv0LQJVEjnonfpqaP0yimRSVT_s0"
+    })
+    Call<PopularMoviesResponse>getPopularMovies(
+            @Query("language") String lang,
+            @Query("page") int page
+    );
+
+    @GET("search/multi")
+    @Headers({
+            "accept: application/json",
+            "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzgwMDEwNDEyNjk0MDc2YjUwZDIzNzJkNGIzMWI0NSIsIm5iZiI6MTcyNjczMDMyNS4xNzI5NzEsInN1YiI6IjY2ZDhlZjcwZTg0NDVhYTljYTAxNzk2MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kSway11ZrYwKrH7Qv0LQJVEjnonfpqaP0yimRSVT_s0"
+    })
+    Call<SearchMoviesResponse>getSearchMovies(
+            @Query("query") String query,
+            @Query("include_adult") boolean includeAdult,
+            @Query("language") String language,
+            @Query("page") int page
+    );
 
 
 

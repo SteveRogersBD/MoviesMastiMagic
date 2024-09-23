@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movies.MovieDetailsActivity;
 import com.example.movies.R;
+import com.example.movies.SeriesDetailsActivity;
 import com.example.movies.response.TopRatedMoviesResponse;
 import com.example.movies.response.TopRatedSeriesResponse;
 import com.squareup.picasso.Picasso;
@@ -44,8 +45,8 @@ public class TopRatedSeriesAdapter extends RecyclerView.Adapter<TopRatedSeriesAd
         holder.posterMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MovieDetailsActivity.class);
-                intent.putExtra("movieId",movie.id);
+                Intent intent = new Intent(context, SeriesDetailsActivity.class);
+                intent.putExtra("series1",movie);
                 context.startActivity(intent);
             }
         });
